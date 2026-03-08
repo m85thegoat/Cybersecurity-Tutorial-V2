@@ -1,0 +1,29 @@
+body, html {
+  margin:0; padding:0; font-family: monospace; background:black; color:#0F0; overflow-x:hidden;
+}
+.container {
+  position: relative;
+  z-index: 10;
+  max-width: 900px;
+  margin: 50px auto;
+  padding: 20px;
+  background: rgba(0,0,0,0.6);
+  border: 1px solid #0F0;
+  border-radius: 10px;
+}
+nav a {
+  color:#0F0; text-decoration:none; margin:0 10px;
+}
+nav a:hover {
+  color:#0FF;
+}
+.tools-grid {
+  display:grid; grid-template-columns: repeat(auto-fit, minmax(150px,1fr)); gap:10px; margin-top:20px;
+}
+.tool-btn {
+  background:#0F0; color:black; padding:10px; text-align:center; border-radius:5px; display:block; text-decoration:none; transition:0.3s;
+}
+.tool-btn:hover { background:#0FF; color:black; transform: scale(1.05);}
+#chat-box { background: rgba(0,0,0,0.8); height:300px; overflow-y:auto; padding:10px; margin-bottom:10px;}
+#chat-box ul { list-style:none; padding:0; margin:0;}
+#chat-box li { padding:2px 0; }
