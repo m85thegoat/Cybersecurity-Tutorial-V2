@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Panel</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<canvas id="matrix"></canvas>
+<div class="container">
+<h1>Admin Panel</h1>
+<form id="admin-login">
+<input type="password" placeholder="Admin Password" required/><br/><br/>
+<button type="submit">Login</button>
+</form>
+</div>
+<script>
+document.getElementById('admin-login').addEventListener('submit', e=>{
+    e.preventDefault();
+    const pass = e.target[0].value;
+    if(pass === "your_admin_password"){ 
+        alert("Admin login successful!"); 
+    }else{ 
+        alert("Wrong password!"); 
+    }
+});
+</script>
+<script src="assets/script.js"></script>
+</body>
+  </html>
