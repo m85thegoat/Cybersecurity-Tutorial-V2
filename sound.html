@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Enable Theme Music</title>
+<link rel="stylesheet" href="assets/style.css">
+<style>
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #000;
+    color: #0f0;
+    font-family: monospace;
+    flex-direction: column;
+}
+button {
+    background-color: #0f0;
+    color: #000;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1.2em;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+button:hover {
+    transform: scale(1.1);
+    background-color: #00ff44;
+}
+</style>
+</head>
+<body>
+
+<h1>Enable Theme Music</h1>
+<button id="playTheme">▶️ Play Theme</button>
+<audio id="themeAudio" src="assets/theme.mp3" loop></audio>
+
+<script>
+const audio = document.getElementById('themeAudio');
+const btn = document.getElementById('playTheme');
+
+btn.addEventListener('click', () => {
+    audio.play().then(() => {
+        btn.textContent = "🔊 Playing...";
+        btn.disabled = true;
+        localStorage.setItem("musicEnabled", "true"); // remember setting
+        window.location.href = "tools.html"; // redirect to tools page
+    }).catch(err => {
+        console.log("Audio play failed:", err);
+        btn.textContent = "❌ Unable to play";
+    });
+});
+</script>
+
+</body>
+</html>
