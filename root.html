@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ROOT ACCESS</title>
+
+<style>
+
+body{
+background:black;
+color:#00ff9c;
+font-family:monospace;
+padding:30px;
+}
+
+h1{
+text-align:center;
+margin-bottom:10px;
+}
+
+p{
+text-align:center;
+margin-bottom:30px;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:12px;
+}
+
+.tool{
+border:1px solid #00ff9c;
+padding:10px;
+text-align:center;
+cursor:pointer;
+transition:0.2s;
+}
+
+.tool:hover{
+background:#002b1c;
+box-shadow:0 0 10px #00ff9c;
+}
+
+a{
+color:#00ff9c;
+text-decoration:none;
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>ROOT CYBERSECURITY TOOL DIRECTORY</h1>
+<p>100 Open Source Security Tools</p>
+
+<div class="grid" id="tools"></div>
+
+<audio id="clickSound" src="assets/click.mp3"></audio>
+<audio id="bgMusic" src="assets/theme.mp3" autoplay loop></audio>
+
+<script>
+
+const tools = [
+
+["Metasploit","https://github.com/rapid7/metasploit-framework"],
+["Nmap","https://github.com/nmap/nmap"],
+["sqlmap","https://github.com/sqlmapproject/sqlmap"],
+["OWASP ZAP","https://github.com/zaproxy/zaproxy"],
+["Nikto","https://github.com/sullo/nikto"],
+["Nuclei","https://github.com/projectdiscovery/nuclei"],
+["ffuf","https://github.com/ffuf/ffuf"],
+["dirsearch","https://github.com/maurosoria/dirsearch"],
+["Gobuster","https://github.com/OJ/gobuster"],
+["wfuzz","https://github.com/xmendez/wfuzz"],
+
+["Subfinder","https://github.com/projectdiscovery/subfinder"],
+["Amass","https://github.com/owasp-amass/amass"],
+["Sublist3r","https://github.com/aboul3la/Sublist3r"],
+["theHarvester","https://github.com/laramies/theHarvester"],
+["Recon-ng","https://github.com/lanmaster53/recon-ng"],
+["SpiderFoot","https://github.com/smicallef/spiderfoot"],
+["EyeWitness","https://github.com/FortyNorthSecurity/EyeWitness"],
+["Aquatone","https://github.com/michenriksen/aquatone"],
+["masscan","https://github.com/robertdavidgraham/masscan"],
+["SecLists","https://github.com/danielmiessler/SecLists"],
+
+["Hashcat","https://github.com/hashcat/hashcat"],
+["JohnTheRipper","https://github.com/openwall/john"],
+["Hydra","https://github.com/vanhauser-thc/thc-hydra"],
+["Aircrack-ng","https://github.com/aircrack-ng/aircrack-ng"],
+["Responder","https://github.com/lgandx/Responder"],
+["Impacket","https://github.com/fortra/impacket"],
+["CrackMapExec","https://github.com/byt3bl33d3r/CrackMapExec"],
+["BloodHound","https://github.com/BloodHoundAD/BloodHound"],
+["Mimikatz","https://github.com/gentilkiwi/mimikatz"],
+["PowerSploit","https://github.com/PowerShellMafia/PowerSploit"],
+
+["WPScan","https://github.com/wpscanteam/wpscan"],
+["Nikto2","https://github.com/sullo/nikto"],
+["Dalfox","https://github.com/hahwul/dalfox"],
+["XSStrike","https://github.com/s0md3v/XSStrike"],
+["SQLiv","https://github.com/the-robot/sqliv"],
+["Arjun","https://github.com/s0md3v/Arjun"],
+["XSpear","https://github.com/hahwul/XSpear"],
+["Corsy","https://github.com/s0md3v/Corsy"],
+["LinkFinder","https://github.com/GerbenJavado/LinkFinder"],
+["ParamSpider","https://github.com/devanshbatham/ParamSpider"],
+
+["TruffleHog","https://github.com/trufflesecurity/trufflehog"],
+["Gitleaks","https://github.com/gitleaks/gitleaks"],
+["Semgrep","https://github.com/semgrep/semgrep"],
+["Bandit","https://github.com/PyCQA/bandit"],
+["Trivy","https://github.com/aquasecurity/trivy"],
+["Grype","https://github.com/anchore/grype"],
+["Clair","https://github.com/quay/clair"],
+["Anchore","https://github.com/anchore/anchore-engine"],
+["kube-bench","https://github.com/aquasecurity/kube-bench"],
+["Falco","https://github.com/falcosecurity/falco"],
+
+["Velociraptor","https://github.com/Velocidex/velociraptor"],
+["Volatility","https://github.com/volatilityfoundation/volatility"],
+["Autopsy","https://github.com/sleuthkit/autopsy"],
+["YARA","https://github.com/VirusTotal/yara"],
+["Cuckoo","https://github.com/cuckoosandbox/cuckoo"],
+["radare2","https://github.com/radareorg/radare2"],
+["Ghidra","https://github.com/NationalSecurityAgency/ghidra"],
+["Frida","https://github.com/frida/frida"],
+["Capstone","https://github.com/capstone-engine/capstone"],
+["Unicorn","https://github.com/unicorn-engine/unicorn"],
+
+["pwntools","https://github.com/Gallopsled/pwntools"],
+["ROPgadget","https://github.com/JonathanSalwan/ROPgadget"],
+["angr","https://github.com/angr/angr"],
+["pwndbg","https://github.com/pwndbg/pwndbg"],
+["GEF","https://github.com/hugsy/gef"],
+["Binwalk","https://github.com/ReFirmLabs/binwalk"],
+["FirmwareModKit","https://github.com/rampageX/firmware-mod-kit"],
+["Apktool","https://github.com/iBotPeaches/Apktool"],
+["MobSF","https://github.com/MobSF/Mobile-Security-Framework-MobSF"],
+["Androguard","https://github.com/androguard/androguard"],
+
+["GoPhish","https://github.com/gophish/gophish"],
+["SET","https://github.com/trustedsec/social-engineer-toolkit"],
+["BeEF","https://github.com/beefproject/beef"],
+["Lynis","https://github.com/CISOfy/lynis"],
+["TestSSL","https://github.com/drwetter/testssl.sh"],
+["SSLyze","https://github.com/nabla-c0d3/sslyze"],
+["Subjack","https://github.com/haccer/subjack"],
+["DNSRecon","https://github.com/darkoperator/dnsrecon"],
+["MassDNS","https://github.com/blechschmidt/massdns"],
+["SMBMap","https://github.com/ShawnDEvans/smbmap"],
+
+["Sherlock","https://github.com/sherlock-project/sherlock"],
+["Twint","https://github.com/twintproject/twint"],
+["OSINT Framework","https://github.com/lockfale/OSINT-Framework"],
+["Sigma","https://github.com/SigmaHQ/sigma"],
+["Atomic Red Team","https://github.com/redcanaryco/atomic-red-team"],
+["MITRE Caldera","https://github.com/mitre/caldera"],
+["Prowler","https://github.com/prowler-cloud/prowler"],
+["ScoutSuite","https://github.com/nccgroup/ScoutSuite"],
+["KubeHunter","https://github.com/aquasecurity/kube-hunter"],
+["KubeSec","https://github.com/controlplaneio/kubesec"]
+
+];
+
+const container=document.getElementById("tools");
+const clickSound=document.getElementById("clickSound");
+
+tools.forEach(tool=>{
+let div=document.createElement("div");
+div.className="tool";
+div.innerHTML=`<a href="${tool[1]}" target="_blank">${tool[0]}</a>`;
+div.onclick=()=>clickSound.play();
+container.appendChild(div);
+});
+
+</script>
+
+</body>
+  </html>
